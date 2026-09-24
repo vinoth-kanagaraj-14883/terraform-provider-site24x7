@@ -271,9 +271,10 @@ show up:
 - **Secrets.** `auth_pass`, `client_certificate_password`, `password`, `private_key`, `token`,
   `client_secret` and `access_token` never come back from the API. Generated config will show
   them empty. Move them to variables sourced from a vault before the first apply, or the apply
-  will blank them out on the live monitor or integration. Only 6 of the 11 attribute/resource
-  pairs are marked `Sensitive`, so the rest also land in your plan output and CI logs in
-  cleartext — the exhaustive table is in the `site24x7-alerting-and-profiles` skill.
+  will blank them out on the live monitor or integration. 15 of the 19 attribute/resource
+  pairs are marked `Sensitive`. The exceptions are `auth_pass` on the website, REST API,
+  web page speed and REST API transaction monitors, which still land in your plan output and
+  CI logs in cleartext — the exhaustive table is in the `site24x7-alerting-and-profiles` skill.
 - **APM applications are adopt-only.** `site24x7_apm_application` has no create endpoint —
   an application exists because an agent reported in. The resource takes over its
   managed/suspended lifecycle, and `managed` is the only attribute with a remote effect.
